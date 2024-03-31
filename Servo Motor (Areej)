@@ -1,0 +1,40 @@
+#include<Servo.h>                             //For adding the library of servo motor
+Servo m1;                                     //Variable of servo motor 1
+Servo m2;                                     //variable of servo motor 2
+int pos;  
+
+void servoF()
+{
+  Serial.println("servo forward is fine");
+  delay(100);
+  
+  for (pos = 0; pos <= 120; pos += 1)
+  {
+    digitalWrite(trigPin1, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPin1, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin1, LOW);
+    duration1 = pulseIn(echoPin1, HIGH);
+    distance1 = duration1 * 0.034 / 2;
+
+    if (distance1 > 6)
+    {
+      m1.write(pos);
+      m2.write(120 - pos);
+    }
+  }
+}
+
+void servoB()
+{
+  Serial.println("Servo back is fine");
+  delay(100);
+  
+  for (pos = 120; pos >= 0; pos -= 1)
+  {
+    m1.write(pos);
+    m2.write(120 - pos);
+    delay(30);
+  }
+}
